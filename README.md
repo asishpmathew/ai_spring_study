@@ -1,5 +1,7 @@
 # ai_spring_study
 
+study github page link:  https://github.com/eazybytes/spring-ai
+
 # OpenAi
 - Open-ai billing information : https://platform.openai.com/settings/organization/billing/overview
 - required 5 doller plan

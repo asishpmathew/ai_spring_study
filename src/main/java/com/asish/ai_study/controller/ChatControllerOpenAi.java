@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/openai")
 public class ChatControllerOpenAi {
 
-    private final ChatClient chatClient;
+    private final ChatClient ollamaChatClient;
 
-    public ChatControllerOpenAi(ChatClient.Builder chatClientBuilder){
-        chatClient = chatClientBuilder.build();
+    public ChatControllerOpenAi( ChatClient ollamaChatClient){
+        this.ollamaChatClient = ollamaChatClient;
     }
 
     @GetMapping("/chat")
     public String chatResponder(@RequestParam("message") String message) {
-        return chatClient.prompt(message).call().content();
+        return ollamaChatClient.prompt(message).call().content();
     }
 }
