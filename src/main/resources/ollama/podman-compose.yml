@@ -33,6 +33,27 @@ services:
       - webui_data:/app/backend/data
     restart: unless-stopped
 
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai_study
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_vol:/var/lib/postgresql/data:Z
+    restart: unless-stopped
+  qdrant:
+    image: 'qdrant/qdrant:latest'
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+
+
 volumes:
   ollama_data:
   webui_data:
+  db_vol:

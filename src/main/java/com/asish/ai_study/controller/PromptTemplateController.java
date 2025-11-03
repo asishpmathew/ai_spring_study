@@ -3,6 +3,7 @@ package com.asish.ai_study.controller;
 import com.asish.ai_study.advisor.TokenUsageAuditAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class PromptTemplateController {
                                 @RequestParam("customerMessage") String customerMessage) {
     return chatClient
         .prompt()
-        .advisors(List.of(new SimpleLoggerAdvisor(), new TokenUsageAuditAdvisor()))
+            .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, customerName)) //unique conversation id
         .system(systemPromptTemplate)
         .user(
             promptTemplateSpec ->
